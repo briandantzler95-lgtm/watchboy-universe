@@ -28,6 +28,21 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
 .kicker{font-size:12px;letter-spacing:.3em;color:#8fd9ff;font-weight:bold}.tv-card{border:1px solid #315c8d;border-radius:18px;padding:40px;background:linear-gradient(125deg,#07182f,#0b0e1f 55%,#310c1b);text-align:center}.tv-card h2{font:italic bold clamp(34px,6vw,58px) Georgia,serif;margin:12px 0}.tv-card p{color:#c9d7ed;line-height:1.7;max-width:660px;margin:14px auto 22px}.badge{display:inline-block;border:1px solid #d14667;color:#ff9daf;border-radius:100px;padding:7px 12px;font-size:12px;letter-spacing:.15em}
 @media(max-width:700px){.hero{min-height:570px}.intro-controls{bottom:20px;right:16px}.tv-card{padding:28px 18px}.wing{font-size:clamp(52px,14vw,85px)}.wingmark{font-size:clamp(76px,18vw,115px)}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Mobile navigation upgrade */
+.menu-toggle{display:none;background:#0b1b33;color:#fff;border:1px solid #418dc2;border-radius:9px;padding:10px 13px;font-size:22px;cursor:pointer}
+@media(max-width:700px){
+ .nav{flex-direction:row;align-items:center;flex-wrap:wrap;padding:12px 0;min-height:64px}
+ .logo{font-size:23px}.logo small{font-size:9px!important}
+ .menu-toggle{display:block;margin-left:auto}
+ .navlinks{display:none;flex-direction:column;flex-basis:100%;width:100%;gap:0;padding:8px 0 12px;border-top:1px solid #23486c}
+ .navlinks.open{display:flex}
+ .navlinks a{display:block;padding:13px 8px;font-size:16px;border-bottom:1px solid #172b45}
+ .hero .wrap{padding-top:68px;padding-bottom:68px}
+ .hero h1{font-size:clamp(42px,10vw,68px)}
+ .hero p{font-size:16px}
+ .buttons .btn{width:100%;text-align:center}
+}
 </style>
 </head>
 <body>
@@ -36,14 +51,20 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
  <div class="intro-inner"><div class="wings" aria-hidden="true"><span class="wing">❯</span><span class="wingmark">W</span><span class="wing right">❯</span></div><div class="intro-title">WATCH BOY UNIVERSE</div><div class="intro-sub">THE POWER OF TIME</div></div>
  <div class="intro-controls"><button class="skip" id="skipIntro" type="button">Skip Intro →</button></div>
 </div>
-<header class="top"><div class="wrap nav"><a class="logo" href="#home">Watch <span>Boy</span> <small style="font:normal 12px Arial;letter-spacing:.2em">UNIVERSE</small></a><nav class="navlinks" aria-label="Main navigation"><a href="#home">Home</a><a href="https://shop.watchboyuniverse.com/">Shop</a><a href="#book">The Book</a><a href="#universe">The Universe</a><a href="#watchboy-tv">WATCH BOY TV</a><a href="#contact">Contact</a></nav></div></header>
+<header class="top"><div class="wrap nav"><a class="logo" href="#home">Watch <span>Boy</span> <small style="font:normal 12px Arial;letter-spacing:.2em">UNIVERSE</small></a><button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Open navigation menu">☰</button><nav class="navlinks" id="mainNav" aria-label="Main navigation"><a href="#home">Home</a><a href="https://shop.watchboyuniverse.com/">Shop</a><a href="#book">The Book</a><a href="#universe">The Universe</a><a href="#watchboy-tv">WATCH BOY TV</a><a href="#contact">Contact</a></nav></div></header>
 <main><div class="hero" id="home"><div class="wrap"><div class="eyebrow">THE OFFICIAL WATCH BOY UNIVERSE</div><h1>ENTER THE<br>WATCH BOY<br>UNIVERSE</h1><p>A heroic story of power, purpose, temptation, and redemption. Discover the world of WATCH BOY, its characters, and the collections inspired by it.</p><div class="buttons"><a class="btn" href="#collections">Explore the Universe</a><a class="btn red" href="https://shop.watchboyuniverse.com/">Shop the Collection</a></div></div></div>
 <section id="collections"><div class="wrap"><div class="sectionhead"><h2>FEATURED COLLECTIONS</h2><p>Explore the WATCH BOY world through signature apparel.</p></div><div class="grid"><article class="tile"><h3>Watch Boy</h3><p>Electric-blue inspired apparel, hoodies and tees.</p><a href="https://shop.watchboyuniverse.com/">Shop Collection →</a></article><article class="tile red"><h3>Victor Edition</h3><p>Bold red energy. A darker side of the universe.</p><a href="https://shop.watchboyuniverse.com/">Shop Victor →</a></article><article class="tile light"><h3>Women's Collection</h3><p>Signature Watch Boy hoodies, joggers and coordinated looks.</p><a href="https://shop.watchboyuniverse.com/">Explore Women's →</a></article></div><p class="subtle" id="shop-info" style="text-align:center;margin-top:22px">Our official store is coming soon. Preview the storefront at shop.watchboyuniverse.com while we finish the collections.</p></div></section>
 <section id="book" style="background:#081329"><div class="wrap"><div class="banner"><div class="eyebrow">THE STORY BEGINS</div><h2>WATCH BOY: POWER OF TIME</h2><p>Meet Ajax Barrett and discover a world where extraordinary power comes with extraordinary consequences.</p><p class="subtle">Official book purchase link coming soon.</p></div></div></section>
 <section id="watchboy-tv" style="background:#040b19"><div class="wrap"><div class="tv-card"><span class="badge">COMING SOON</span><div class="kicker" style="margin-top:18px">ORIGINAL ANIMATED STORIES</div><h2>WATCH BOY TV</h2><p>A cinematic animated superhero series following the story of <em>WATCH BOY: POWER OF TIME</em> from the beginning. Trailers, episodes and character stories will appear here as they are released.</p><a class="btn secondary" href="#book">Discover the Story</a></div></div></section>
 <section id="universe"><div class="wrap"><div class="sectionhead"><h2>THE UNIVERSE</h2><p>Two watches. Different powers. A world of choices.</p></div><div class="grid"><article class="tile"><h3>Ajax</h3><p>The hero at the center of the WATCH BOY story.</p></article><article class="tile red"><h3>Victor</h3><p>The inspiration behind the red Victor Edition collection.</p></article><article class="tile"><h3>What's Next</h3><p>More stories, characters and releases as the universe grows.</p></article></div></div></section><section id="contact" style="background:#071126"><div class="wrap"><div class="sectionhead"><h2>STAY CONNECTED</h2><p>Official social and contact links will be added here when confirmed.</p></div></div></section></main>
 <footer><div class="wrap">© <span id="year">2026</span> WATCH BOY UNIVERSE · Created by BJD · All rights reserved.<p>Official links and original artwork will be added before launch.</p></div></footer>
-<script>document.getElementById('year').textContent=new Date().getFullYear();(function(){
+<script>
+(function(){
+ var button=document.getElementById('menuToggle'), nav=document.getElementById('mainNav');
+ button.addEventListener('click',function(){var open=nav.classList.toggle('open');button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu');button.textContent=open?'✕':'☰';});
+ nav.addEventListener('click',function(event){if(event.target.closest('a')){nav.classList.remove('open');button.setAttribute('aria-expanded','false');button.setAttribute('aria-label','Open navigation menu');button.textContent='☰';}});
+})();
+document.getElementById('year').textContent=new Date().getFullYear();(function(){
   var intro=document.getElementById('intro'), skip=document.getElementById('skipIntro');
   var seen=false;try{seen=sessionStorage.getItem('watchboyIntroSeen')==='1'}catch(e){}
   var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
