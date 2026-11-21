@@ -1,7 +1,8 @@
 {
   "name": "WATCH BOY UNIVERSE",
   "short_name": "WATCH BOY",
-  "description": "The official WATCH BOY UNIVERSE app. Explore books, characters, clothing, and merchandise.",
+  "description": "Official WATCH BOY UNIVERSE: books, characters, clothing, and merchandise.",
+  "id": "/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

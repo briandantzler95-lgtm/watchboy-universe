@@ -46,6 +46,7 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
  .hero p{font-size:16px}
  .buttons .btn{width:100%;text-align:center}
 }
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -54,8 +55,23 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
  <div class="intro-inner"><div class="wings" aria-hidden="true"><span class="wing">❯</span><span class="wingmark">W</span><span class="wing right">❯</span></div><div class="intro-title">WATCH BOY UNIVERSE</div><div class="intro-sub">THE POWER OF TIME</div></div>
  <div class="intro-controls"><button class="skip" id="skipIntro" type="button">Skip Intro →</button></div>
 </div>
-<header class="top"><div class="wrap nav"><a class="logo" href="#home">Watch <span>Boy</span> <small style="font:normal 12px Arial;letter-spacing:.2em">UNIVERSE</small></a><button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Open navigation menu">☰</button><nav class="navlinks" id="mainNav" aria-label="Main navigation"><a href="#home">Home</a><a href="https://shop.watchboyuniverse.com/">Shop</a><a href="#book">The Book</a><a href="#universe">The Universe</a><a href="#watchboy-tv">WATCH BOY TV</a><a href="#contact">Contact</a></nav></div></header>
+<header class="top"><div class="wrap nav"><a class="logo" href="#home">Watch <span>Boy</span> <small style="font:normal 12px Arial;letter-spacing:.2em">UNIVERSE</small></a><button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Open navigation menu">☰</button><nav class="navlinks" id="mainNav" aria-label="Main navigation"><a href="#home">Home</a><a href="https://shop.watchboyuniverse.com/">Shop</a><a href="#book">The Book</a><a href="#install-app">Get the App</a><a href="#universe">The Universe</a><a href="#watchboy-tv">WATCH BOY TV</a><a href="#contact">Contact</a></nav></div></header>
 <main><div class="hero" id="home"><div class="wrap"><div class="eyebrow">THE OFFICIAL WATCH BOY UNIVERSE</div><h1>ENTER THE<br>WATCH BOY<br>UNIVERSE</h1><p>A heroic story of power, purpose, temptation, and redemption. Discover the world of WATCH BOY, its characters, and the collections inspired by it.</p><div class="buttons"><a class="btn" href="#universe">Explore the Universe</a><a class="btn red" href="https://shop.watchboyuniverse.com/">Shop the Collection</a></div></div></div>
+<section id="install-app" style="background:#071126">
+  <div class="wrap">
+    <div class="sectionhead">
+      <h2>WATCH BOY ON YOUR PHONE</h2>
+      <p>Install the WATCH BOY UNIVERSE website on your Android home screen.</p>
+    </div>
+    <div style="max-width:750px;margin:auto;text-align:center;padding:28px;border:1px solid #286ba7;border-radius:16px;background:#09152b">
+      <div style="font-size:42px" aria-hidden="true">⌚</div>
+      <p style="color:#d5e4fb;line-height:1.7">Get quick access to WATCH BOY stories, characters and merchandise in a standalone, app-like window.</p>
+      <button id="installAppButton" class="btn" type="button" hidden>Install WATCH BOY</button>
+      <p id="installInstructions" style="color:#b5c5de;line-height:1.65;font-size:14px">On Android, open this website in Chrome, tap the three-dot menu, then choose <strong>Install app</strong> or <strong>Add to Home screen</strong> if offered.</p>
+      <p style="color:#94a8c3;font-size:12px">This installs the website on your device; the separate Google Play app is still in development.</p>
+    </div>
+  </div>
+</section>
 <section id="collections"><div class="wrap"><div class="sectionhead"><h2>FEATURED COLLECTIONS</h2><p>Explore the WATCH BOY world through signature apparel.</p></div><div class="grid"><article class="tile"><h3>Watch Boy</h3><p>Electric-blue inspired apparel, hoodies and tees.</p><a href="https://shop.watchboyuniverse.com/">Shop Collection →</a></article><article class="tile red"><h3>Victor Edition</h3><p>Bold red energy. A darker side of the universe.</p><a href="https://shop.watchboyuniverse.com/">Shop Victor →</a></article><article class="tile light"><h3>Women's Collection</h3><p>Signature Watch Boy hoodies, joggers and coordinated looks.</p><a href="https://shop.watchboyuniverse.com/">Explore Women's →</a></article></div><p class="subtle" id="shop-info" style="text-align:center;margin-top:22px">Our official store is coming soon. Preview the storefront at shop.watchboyuniverse.com while we finish the collections.</p></div></section>
 <section id="book" style="background:#081329"><div class="wrap"><div class="banner"><div class="eyebrow">THE STORY BEGINS</div><h2>WATCH BOY: POWER OF TIME</h2><p>Meet Ajax Barrett and discover a world where extraordinary power comes with extraordinary consequences.</p><p class="subtle">Official book purchase link coming soon.</p></div></div></section>
 <section id="watchboy-tv" style="background:#040b19"><div class="wrap"><div class="tv-card"><span class="badge">COMING SOON</span><div class="kicker" style="margin-top:18px">ORIGINAL ANIMATED STORIES</div><h2>WATCH BOY TV</h2><p>A cinematic animated superhero series following the story of <em>WATCH BOY: POWER OF TIME</em> from the beginning. Trailers, episodes and character stories will appear here as they are released.</p><div class="tv-roadmap" aria-label="Upcoming content"><div><strong>01</strong><span>Origin Story</span><small>In development</small></div><div><strong>02</strong><span>Character Stories</span><small>Planned</small></div><div><strong>03</strong><span>Animated Episodes</span><small>Coming later</small></div></div><a class="btn secondary" href="#book">Discover the Story</a></div></div></section>
@@ -74,4 +90,37 @@ document.getElementById('year').textContent=new Date().getFullYear();(function()
   if(!seen&&!reduced){intro.hidden=false;document.body.style.overflow='hidden';skip.focus();var timer=setTimeout(closeIntro,6500);skip.addEventListener('click',function(){clearTimeout(timer);closeIntro()});}
   function closeIntro(){if(intro.hidden||intro.classList.contains('done'))return;intro.classList.add('done');document.body.style.overflow='';try{sessionStorage.setItem('watchboyIntroSeen','1')}catch(e){}setTimeout(function(){intro.hidden=true},700)}
 })();</script>
+<script>
+(function(){
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').catch(function(error) {
+        console.warn('Offline support unavailable:', error);
+      });
+    });
+  }
+  var installEvent = null;
+  var installButton = document.getElementById('installAppButton');
+  var installHelp = document.getElementById('installInstructions');
+  window.addEventListener('beforeinstallprompt', function(event) {
+    event.preventDefault();
+    installEvent = event;
+    installButton.hidden = false;
+    installHelp.textContent = 'Tap Install WATCH BOY to add the app to your device.';
+  });
+  installButton.addEventListener('click', async function() {
+    if (!installEvent) return;
+    var pending = installEvent;
+    installEvent = null;
+    installButton.hidden = true;
+    await pending.prompt();
+    installHelp.textContent = 'You can also install or reopen WATCH BOY using your browser menu.';
+  });
+  window.addEventListener('appinstalled', function() {
+    installEvent = null;
+    installButton.hidden = true;
+    installHelp.textContent = 'WATCH BOY UNIVERSE is installed. Open it from your home screen.';
+  });
+})();
+</script>
 </body></html>
