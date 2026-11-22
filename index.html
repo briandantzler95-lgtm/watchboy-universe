@@ -163,6 +163,43 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
 .intro .wing{line-height:.92;filter:drop-shadow(0 0 8px #358dff44)}
 .intro .wing.right{filter:drop-shadow(0 0 8px #ff496344)}
 
+
+/* WATCH BOY cinematic power-up v5 — blue Capsule energy, quiet red Shadow accent. */
+.intro .watch-ring-blue,.intro .watch-ring-red{
+  transform-box:view-box;
+  transform-origin:168px 234px;
+  will-change:transform;
+}
+.intro .watch-ring-blue{animation:wb-energy-blue 5.2s linear infinite}
+.intro .watch-ring-red{animation:wb-energy-red 8.5s linear infinite reverse}
+.intro .watch-light-beam{
+  transform-box:view-box;
+  animation:wb-glass-sweep 5.6s ease-in-out infinite;
+  pointer-events:none;
+}
+.intro .watch-red-accent{animation:wb-shadow-glow 3.8s ease-in-out infinite}
+.intro .watch-halo{
+  background:radial-gradient(ellipse at 39% 50%,#008bff60,transparent 65%),
+             radial-gradient(ellipse at 70% 57%,#ec174020,transparent 58%);
+}
+@keyframes wb-energy-blue{to{transform:rotate(360deg)}}
+@keyframes wb-energy-red{to{transform:rotate(360deg)}}
+@keyframes wb-glass-sweep{
+  0%,14%{transform:translateX(-190px);opacity:0}
+  23%{opacity:.75}
+  48%{transform:translateX(375px);opacity:.36}
+  49%,100%{transform:translateX(375px);opacity:0}
+}
+@keyframes wb-shadow-glow{
+  0%,100%{opacity:.78;filter:drop-shadow(0 0 1px #e44e70)}
+  50%{opacity:1;filter:drop-shadow(0 0 4px #ff446c)}
+}
+@media(prefers-reduced-motion:reduce){
+  .intro .watch-ring-blue,.intro .watch-ring-red,
+  .intro .watch-light-beam,.intro .watch-red-accent{animation:none!important}
+  .intro .watch-light-beam{opacity:0!important}
+}
+
 </style>
 </head>
 <body>
@@ -206,6 +243,18 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
      <feGaussianBlur stdDeviation="4" result="blur"/>
      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
    </filter>
+
+   <filter id="watchRedGlow" x="-70%" y="-70%" width="240%" height="240%">
+     <feGaussianBlur stdDeviation="2.6" result="blur"/>
+     <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+   </filter>
+   <clipPath id="watchDialGlass"><rect x="64" y="126" width="205" height="210" rx="36"/></clipPath>
+   <linearGradient id="watchLightSweep" x1="0" y1="0" x2="1" y2="0">
+     <stop offset="0" stop-color="#e5f8ff" stop-opacity="0"/>
+     <stop offset=".45" stop-color="#c5eeff" stop-opacity=".20"/>
+     <stop offset=".51" stop-color="#f5fcff" stop-opacity=".32"/>
+     <stop offset="1" stop-color="#e5f8ff" stop-opacity="0"/>
+   </linearGradient>
  </defs>
  <!-- Layered engineered wrist strap -->
  <rect x="125" y="6" width="90" height="162" rx="18" fill="url(#strapMetal)" stroke="#54748d" stroke-width="2"/>
@@ -227,15 +276,27 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
  <rect x="51" y="111" width="233" height="243" rx="49" fill="url(#caseDark)" stroke="#153c62" stroke-width="3"/>
  <rect x="64" y="126" width="205" height="210" rx="36" fill="url(#dialGlow)" stroke="#58afff" stroke-width="2"/>
  <rect x="71" y="133" width="191" height="196" rx="31" fill="none" stroke="#8ddfff" stroke-opacity=".26"/>
+ <!-- Glass light sweep, clipped so it never crosses the bezel -->
+ <g clip-path="url(#watchDialGlass)" aria-hidden="true">
+   <path class="watch-light-beam" d="M-110 105L-65 105L100 345L55 345Z" fill="url(#watchLightSweep)"/>
+ </g>
  <!-- Glowing viewport -->
  <path d="M93 151H129" stroke="#9edcff" stroke-width="2.7" stroke-linecap="round"/>
- <path d="M207 151H241" stroke="#ff6583" stroke-width="2.7" stroke-linecap="round" opacity=".95"/>
- <text x="168" y="154" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" letter-spacing="1.8" fill="#cfedff">CAPSULE</text>
+ <path class="watch-red-accent" d="M207 151H241" stroke="#ff6583" stroke-width="2.7" stroke-linecap="round" opacity=".95"/>
+ <text x="168" y="154" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="3" fill="#d9efff">BJD</text>
+ <!-- Quiet time-energy field around the watch's central WB display -->
  <circle cx="168" cy="234" r="73" stroke="#0d6fc3" stroke-width="1.4" opacity=".48" fill="none"/>
- <circle cx="168" cy="234" r="66" stroke="#3faeff" stroke-width="1.5" stroke-dasharray="3 10" opacity=".6" fill="none"/>
+ <circle cx="168" cy="234" r="66" stroke="#3faeff" stroke-width="1.5" stroke-dasharray="3 10" opacity=".38" fill="none"/>
  <circle cx="168" cy="234" r="57" stroke="#5cd2ff" stroke-width="2.6" fill="none" opacity=".24"/>
- <path d="M168 168A66 66 0 0 1 233 231" stroke="url(#displayBlue)" stroke-width="4.5" stroke-linecap="round" fill="none" filter="url(#watchBlueGlow)"/>
- <path d="M168 300A66 66 0 0 1 104 233" stroke="#239af4" stroke-width="3" stroke-linecap="round" fill="none" opacity=".7"/>
+ <!-- Blue Capsule Watch power arcs rotate clockwise as the intro plays. -->
+ <g class="watch-ring-blue" aria-hidden="true">
+   <circle cx="168" cy="234" r="66" fill="none" stroke="url(#displayBlue)" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="115 300" filter="url(#watchBlueGlow)"/>
+   <circle cx="168" cy="234" r="73" fill="none" stroke="#61c7ff" stroke-width="1" stroke-linecap="round" stroke-dasharray="34 425" opacity=".6"/>
+ </g>
+ <!-- A restrained Shadow Watch red accent circles in the opposite direction. -->
+ <g class="watch-ring-red" aria-hidden="true">
+   <circle cx="168" cy="234" r="61" fill="none" stroke="#f55c7f" stroke-width="2.3" stroke-linecap="round" stroke-dasharray="35 349" opacity=".87" filter="url(#watchRedGlow)"/>
+ </g>
  <circle cx="168" cy="234" r="43" fill="#031225" stroke="#3477a5" stroke-width="1.4"/>
  <text x="168" y="243" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="38" font-weight="bold" letter-spacing="-3" fill="url(#displayBlue)" filter="url(#watchBlueGlow)">WB</text>
  <text x="168" y="267" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" letter-spacing="2" fill="#9dcee9">01:00</text>
