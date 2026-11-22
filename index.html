@@ -220,13 +220,25 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
  .intro .watch-light-beam{animation:none!important}}
 
 
-/* WATCH BOY v8 · TITANIUM EXOSHELL + ENERGIZED STRAPS */
-.intro .strap-track-blue,.intro .strap-track-red{
-  stroke-dasharray:14 10;
+/* WATCH BOY v12 · continuous, full-length dual-band energy rails.
+   Keep each blue/red channel illuminated end-to-end while bright pulses travel
+   from the lower edge toward the upper edge across BOTH wristband sections. */
+.intro .strap-track-blue,.intro .strap-track-red {
+  stroke-dasharray:none;
   stroke-dashoffset:0;
-  animation:wb-strappulse 1.6s linear infinite;
+  opacity:.92;
+  animation:wb-band-rail-glow 2.5s ease-in-out infinite;
 }
-.intro .strap-track-red{animation-direction:reverse;animation-duration:1.9s}
+.intro .strap-track-red{animation-delay:-1.25s}
+.intro .strap-tracer-blue,.intro .strap-tracer-red {
+  stroke-dasharray:31 165;
+  stroke-dashoffset:120;
+  stroke-linecap:round;
+  fill:none;
+  animation:wb-band-energy-travel 2s linear infinite;
+  will-change:stroke-dashoffset;
+}
+.intro .strap-tracer-red{animation-delay:-.95s}
 .intro .strap-led-blue,.intro .strap-led-red{animation:wb-strapnodes 2.1s ease-in-out infinite}
 .intro .strap-led-red{animation-delay:.55s}
 .intro .watch-bezel-blue,.intro .watch-bezel-red{animation:wb-exoshell-glow 3.1s ease-in-out infinite}
@@ -234,13 +246,16 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
 .intro .watch-bjd-signature{filter:drop-shadow(0 0 3px #daf8ff88) drop-shadow(0 0 7px #208fff66)}
 .intro .watch-stage{width:min(68vw,292px)}
 @media(max-width:700px){.intro .watch-stage{width:min(70vw,285px);height:min(48vh,342px)}}
-@keyframes wb-strappulse{to{stroke-dashoffset:-48}}
+@keyframes wb-band-energy-travel{from{stroke-dashoffset:120}to{stroke-dashoffset:-76}}
+@keyframes wb-band-rail-glow{0%,100%{opacity:.78}50%{opacity:1}}
 @keyframes wb-strapnodes{0%,100%{opacity:.5}50%{opacity:1}}
 @keyframes wb-exoshell-glow{0%,100%{opacity:.64}50%{opacity:1}}
 @media(prefers-reduced-motion:reduce){
  .intro .strap-track-blue,.intro .strap-track-red,
+ .intro .strap-tracer-blue,.intro .strap-tracer-red,
  .intro .strap-led-blue,.intro .strap-led-red,
  .intro .watch-bezel-blue,.intro .watch-bezel-red{animation:none!important}
+ .intro .strap-tracer-blue,.intro .strap-tracer-red{display:none}
 }
 
 
@@ -394,8 +409,17 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
    <path d="M137 19V116" stroke="#1b5d93" stroke-width="3" opacity=".36"/>
    <path d="M205 19V116" stroke="#a73355" stroke-width="3" opacity=".3"/>
    <!-- paired energized rails, their pulses travel toward the dial -->
-   <path class="strap-track-blue" d="M137 19V112" stroke="#54c8ff" stroke-width="3.4" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
-   <path class="strap-track-red" d="M204 19V112" stroke="#ff547c" stroke-width="3.4" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-track-blue" d="M137 15V115" stroke="#54c8ff" stroke-width="4.8" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-tracer-blue" d="M137 115V15" stroke="#cbf6ff" stroke-width="5" filter="url(#wristLedGlow)"/>
+   <path class="strap-core-blue" d="M137 15V115" stroke="#bcefff" stroke-width="1.6" stroke-linecap="round" opacity="1" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-track-red" d="M204 15V115" stroke="#ff315c" stroke-width="4.8" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-tracer-red" d="M204 115V15" stroke="#ffc6d1" stroke-width="5" filter="url(#wristLedGlow)"/>
+   <path class="strap-core-red" d="M204 15V115" stroke="#ffb1c6" stroke-width="3.2" stroke-linecap="round" opacity="1" fill="none" filter="url(#wristLedGlow)"/>
+   <!-- Linked blue/red energy contacts bridge all visible strap segments. -->
+   <g fill="none" stroke-linecap="round" opacity=".85">
+     <path d="M137 45h8M137 68h8M137 90h8" stroke="#60cfff" stroke-width="1.5"/>
+     <path d="M204 45h-8M204 68h-8M204 90h-8" stroke="#ff6788" stroke-width="1.5"/>
+   </g>
    <g fill="#91dfff" stroke="#18445f" stroke-width="1">
      <circle class="strap-led-blue" cx="137" cy="26" r="3"/>
      <circle class="strap-led-blue" cx="137" cy="105" r="3"/>
@@ -414,8 +438,16 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
    <path d="M145 409H197L194 424H148Z" fill="#122940" stroke="#486783" stroke-width="1"/>
    <path d="M145 434L153 427H188L196 434" fill="none" stroke="#486b83" stroke-width="1.4"/>
    <path d="M124 347L125 440M215 347L217 440" stroke="#8aa6be" stroke-width="1" opacity=".6"/>
-   <path class="strap-track-blue" d="M137 350L136 440" stroke="#56c9ff" stroke-width="3.4" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
-   <path class="strap-track-red" d="M205 350L205 440" stroke="#ff597e" stroke-width="3.4" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-track-blue" d="M137 343L136 450" stroke="#56c9ff" stroke-width="4.8" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-tracer-blue" d="M136 450L137 343" stroke="#cbf6ff" stroke-width="5" filter="url(#wristLedGlow)"/>
+   <path class="strap-core-blue" d="M137 343L136 450" stroke="#bcefff" stroke-width="1.6" stroke-linecap="round" opacity="1" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-track-red" d="M205 343V450" stroke="#ff315c" stroke-width="4.8" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-tracer-red" d="M205 450V343" stroke="#ffc6d1" stroke-width="5" filter="url(#wristLedGlow)"/>
+   <path class="strap-core-red" d="M205 343V450" stroke="#ffb1c6" stroke-width="3.2" stroke-linecap="round" opacity="1" fill="none" filter="url(#wristLedGlow)"/>
+   <g fill="none" stroke-linecap="round" opacity=".85">
+     <path d="M136 365h8M136 390h8M136 414h8" stroke="#65d1ff" stroke-width="1.5"/>
+     <path d="M205 365h-8M205 390h-8M205 414h-8" stroke="#ff7191" stroke-width="1.5"/>
+   </g>
    <circle class="strap-led-blue" cx="136" cy="437" r="3" fill="#a9eaff"/>
    <circle class="strap-led-red" cx="205" cy="437" r="3" fill="#ff95aa"/>
  </g>
