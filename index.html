@@ -220,13 +220,25 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
  .intro .watch-light-beam{animation:none!important}}
 
 
-/* WATCH BOY v8 · TITANIUM EXOSHELL + ENERGIZED STRAPS */
-.intro .strap-track-blue,.intro .strap-track-red{
-  stroke-dasharray:14 10;
+/* WATCH BOY v12 · continuous, full-length dual-band energy rails.
+   Keep each blue/red channel illuminated end-to-end while bright pulses travel
+   from the lower edge toward the upper edge across BOTH wristband sections. */
+.intro .strap-track-blue,.intro .strap-track-red {
+  stroke-dasharray:none;
   stroke-dashoffset:0;
-  animation:wb-strappulse 1.6s linear infinite;
+  opacity:.92;
+  animation:wb-band-rail-glow 2.5s ease-in-out infinite;
 }
-.intro .strap-track-red{animation-direction:reverse;animation-duration:1.9s}
+.intro .strap-track-red{animation-delay:-1.25s}
+.intro .strap-tracer-blue,.intro .strap-tracer-red {
+  stroke-dasharray:31 165;
+  stroke-dashoffset:120;
+  stroke-linecap:round;
+  fill:none;
+  animation:wb-band-energy-travel 2s linear infinite;
+  will-change:stroke-dashoffset;
+}
+.intro .strap-tracer-red{animation-delay:-.95s}
 .intro .strap-led-blue,.intro .strap-led-red{animation:wb-strapnodes 2.1s ease-in-out infinite}
 .intro .strap-led-red{animation-delay:.55s}
 .intro .watch-bezel-blue,.intro .watch-bezel-red{animation:wb-exoshell-glow 3.1s ease-in-out infinite}
@@ -234,13 +246,16 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
 .intro .watch-bjd-signature{filter:drop-shadow(0 0 3px #daf8ff88) drop-shadow(0 0 7px #208fff66)}
 .intro .watch-stage{width:min(68vw,292px)}
 @media(max-width:700px){.intro .watch-stage{width:min(70vw,285px);height:min(48vh,342px)}}
-@keyframes wb-strappulse{to{stroke-dashoffset:-48}}
+@keyframes wb-band-energy-travel{from{stroke-dashoffset:120}to{stroke-dashoffset:-76}}
+@keyframes wb-band-rail-glow{0%,100%{opacity:.78}50%{opacity:1}}
 @keyframes wb-strapnodes{0%,100%{opacity:.5}50%{opacity:1}}
 @keyframes wb-exoshell-glow{0%,100%{opacity:.64}50%{opacity:1}}
 @media(prefers-reduced-motion:reduce){
  .intro .strap-track-blue,.intro .strap-track-red,
+ .intro .strap-tracer-blue,.intro .strap-tracer-red,
  .intro .strap-led-blue,.intro .strap-led-red,
  .intro .watch-bezel-blue,.intro .watch-bezel-red{animation:none!important}
+ .intro .strap-tracer-blue,.intro .strap-tracer-red{display:none}
 }
 
 
@@ -270,6 +285,8 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
 .intro .watch-side-control-red .side-button-light{animation:wb-tactile-glow 2.1s ease-in-out infinite 1.05s}
 @keyframes wb-tactile-glow{0%,100%{opacity:.85}50%{opacity:1}}
 @media(prefers-reduced-motion:reduce){.intro .watch-side-control .side-button-light{animation:none}}
+/* v15: red BJD signature and prominent golden-yellow Power of Time nameplate. */
+.intro .watch-bjd-signature{filter:drop-shadow(0 0 2px #ff6a80a8) drop-shadow(0 0 5px #e92255a8)}
 </style>
 </head>
 <body>
@@ -356,6 +373,18 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
   <linearGradient id="bjdRedSignature" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0" stop-color="#ffe0e2"/><stop offset=".37" stop-color="#ff6b7d"/><stop offset="1" stop-color="#dc103a"/>
   </linearGradient>
+  <!-- Rich golden-yellow watch engraving, inspired by the crown's gold accents. -->
+  <linearGradient id="powerTimeGoldenYellow" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fffcea"/>
+    <stop offset=".25" stop-color="#fff47a"/>
+    <stop offset=".58" stop-color="#ffd82f"/>
+    <stop offset=".84" stop-color="#e9af1e"/>
+    <stop offset="1" stop-color="#fff0a8"/>
+  </linearGradient>
+  <filter id="powerTimeGlow" x="-45%" y="-65%" width="190%" height="240%">
+    <feGaussianBlur stdDeviation="1.2" result="glow"/>
+    <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
   <linearGradient id="tactileBlue" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0" stop-color="#c8f6ff"/><stop offset=".30" stop-color="#4cccff"/><stop offset=".75" stop-color="#0074ff"/><stop offset="1" stop-color="#0045c5"/>
   </linearGradient>
@@ -394,8 +423,17 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
    <path d="M137 19V116" stroke="#1b5d93" stroke-width="3" opacity=".36"/>
    <path d="M205 19V116" stroke="#a73355" stroke-width="3" opacity=".3"/>
    <!-- paired energized rails, their pulses travel toward the dial -->
-   <path class="strap-track-blue" d="M137 19V112" stroke="#54c8ff" stroke-width="3.4" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
-   <path class="strap-track-red" d="M204 19V112" stroke="#ff547c" stroke-width="3.4" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-track-blue" d="M137 15V115" stroke="#54c8ff" stroke-width="4.8" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-tracer-blue" d="M137 115V15" stroke="#cbf6ff" stroke-width="5" filter="url(#wristLedGlow)"/>
+   <path class="strap-core-blue" d="M137 15V115" stroke="#bcefff" stroke-width="1.6" stroke-linecap="round" opacity="1" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-track-red" d="M204 15V115" stroke="#ff315c" stroke-width="4.8" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-tracer-red" d="M204 115V15" stroke="#ffc6d1" stroke-width="5" filter="url(#wristLedGlow)"/>
+   <path class="strap-core-red" d="M204 15V115" stroke="#ffb1c6" stroke-width="3.2" stroke-linecap="round" opacity="1" fill="none" filter="url(#wristLedGlow)"/>
+   <!-- Linked blue/red energy contacts bridge all visible strap segments. -->
+   <g fill="none" stroke-linecap="round" opacity=".85">
+     <path d="M137 45h8M137 68h8M137 90h8" stroke="#60cfff" stroke-width="1.5"/>
+     <path d="M204 45h-8M204 68h-8M204 90h-8" stroke="#ff6788" stroke-width="1.5"/>
+   </g>
    <g fill="#91dfff" stroke="#18445f" stroke-width="1">
      <circle class="strap-led-blue" cx="137" cy="26" r="3"/>
      <circle class="strap-led-blue" cx="137" cy="105" r="3"/>
@@ -414,8 +452,16 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
    <path d="M145 409H197L194 424H148Z" fill="#122940" stroke="#486783" stroke-width="1"/>
    <path d="M145 434L153 427H188L196 434" fill="none" stroke="#486b83" stroke-width="1.4"/>
    <path d="M124 347L125 440M215 347L217 440" stroke="#8aa6be" stroke-width="1" opacity=".6"/>
-   <path class="strap-track-blue" d="M137 350L136 440" stroke="#56c9ff" stroke-width="3.4" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
-   <path class="strap-track-red" d="M205 350L205 440" stroke="#ff597e" stroke-width="3.4" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-track-blue" d="M137 343L136 450" stroke="#56c9ff" stroke-width="4.8" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-tracer-blue" d="M136 450L137 343" stroke="#cbf6ff" stroke-width="5" filter="url(#wristLedGlow)"/>
+   <path class="strap-core-blue" d="M137 343L136 450" stroke="#bcefff" stroke-width="1.6" stroke-linecap="round" opacity="1" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-track-red" d="M205 343V450" stroke="#ff315c" stroke-width="4.8" stroke-linecap="round" fill="none" filter="url(#wristLedGlow)"/>
+   <path class="strap-tracer-red" d="M205 450V343" stroke="#ffc6d1" stroke-width="5" filter="url(#wristLedGlow)"/>
+   <path class="strap-core-red" d="M205 343V450" stroke="#ffb1c6" stroke-width="3.2" stroke-linecap="round" opacity="1" fill="none" filter="url(#wristLedGlow)"/>
+   <g fill="none" stroke-linecap="round" opacity=".85">
+     <path d="M136 365h8M136 390h8M136 414h8" stroke="#65d1ff" stroke-width="1.5"/>
+     <path d="M205 365h-8M205 390h-8M205 414h-8" stroke="#ff7191" stroke-width="1.5"/>
+   </g>
    <circle class="strap-led-blue" cx="136" cy="437" r="3" fill="#a9eaff"/>
    <circle class="strap-led-red" cx="205" cy="437" r="3" fill="#ff95aa"/>
  </g>
@@ -482,12 +528,14 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
  <!-- Original two signature index bars stay on the left and right. -->
  <path d="M93 151H126" stroke="#9edcff" stroke-width="2.7" stroke-linecap="round"/>
  <path class="watch-red-accent" d="M210 151H241" stroke="#ff6583" stroke-width="2.7" stroke-linecap="round" opacity=".95"/>
+ <!-- Version 15: bold, ruby-red cursive BJD signature -->
  <text class="watch-bjd-signature" x="168" y="157" text-anchor="middle"
     font-family="'Brush Script MT','Segoe Script','URW Chancery L',cursive"
     font-size="24" font-style="italic" font-weight="700" letter-spacing=".1"
-    stroke="#172536" stroke-width=".6" paint-order="stroke"
+    stroke="#2b0714" stroke-width=".7" paint-order="stroke"
     filter="url(#bjdSignatureGlow)"
-    aria-label="BJD — blue B, gold J, red D"><tspan fill="url(#bjdBlueSignature)">B</tspan><tspan fill="url(#bjdGoldSignature)">J</tspan><tspan fill="url(#bjdRedSignature)">D</tspan></text>
+    fill="url(#bjdRedSignature)"
+    aria-label="BJD in ruby red cursive">BJD</text>
  <path d="M104 178H123M214 178H232" stroke="#2674a3" stroke-width="1" opacity=".62"/>
  <path d="M105 291H120M216 291H230" stroke="#3b779d" stroke-width="1" opacity=".5"/>
  <!-- Quiet time-energy field around the watch's central WB display -->
@@ -509,7 +557,17 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
  <circle cx="168" cy="170" r="3.3" fill="#a8e9ff" filter="url(#watchBlueGlow)"/>
  <circle cx="230" cy="234" r="2.8" fill="#5dc6ff"/>
  <circle cx="107" cy="234" r="2.8" fill="#5dc6ff"/>
- <text x="168" y="314" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" letter-spacing="2" fill="#70b9e6">TIME IS POWER</text>
+ <!-- Larger golden-yellow POWER OF TIME script in a glowing nameplate. -->
+ <rect x="87" y="292" width="162" height="36" rx="11"
+       fill="#030914" fill-opacity=".88" stroke="#d4a23c" stroke-opacity=".66" stroke-width="1.1"/>
+ <path d="M103 296H233" stroke="#fff1a3" stroke-opacity=".36" stroke-width=".8" stroke-linecap="round"/>
+ <text x="168" y="319" text-anchor="middle" aria-label="Power of Time"
+       font-family="'Brush Script MT','Segoe Script','URW Chancery L',cursive"
+       font-size="25.5" font-weight="700" font-style="italic"
+       textLength="145" lengthAdjust="spacingAndGlyphs"
+       fill="url(#powerTimeGoldenYellow)"
+       stroke="#251600" stroke-width=".65" paint-order="stroke"
+       filter="url(#powerTimeGlow)">Power of Time</text>
  <path d="M77 134Q101 121 118 126" stroke="#e1f2ff" stroke-opacity=".55" fill="none" stroke-width="3" stroke-linecap="round"/>
  <!-- fine mechanical corner detailing -->
  <circle cx="68" cy="135" r="3" fill="#8499af"/><circle cx="268" cy="135" r="3" fill="#8499af"/>
