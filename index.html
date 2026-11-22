@@ -149,6 +149,20 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
  }
 }
 
+
+/* Capsule Watch intro refinement: keep BLUE and RED index bars; clear CAPSULE label. */
+.intro .wings{position:relative;isolation:isolate;gap:7px;margin-bottom:3px;
+  filter:drop-shadow(0 0 12px #2379d966) drop-shadow(0 3px 7px #0009)}
+.intro .wings::after{content:"";position:absolute;bottom:-9px;left:26%;right:26%;height:1px;
+  background:linear-gradient(90deg,transparent,#56c1ff, #eef7ff 50%,#fb6680,transparent);
+  box-shadow:0 0 7px #3b9aff99}
+.intro .wingmark{display:inline-block;padding:0 .10em .05em 0;
+  background:linear-gradient(150deg,#fff 10%,#b3c7e1 38%,#f9fcff 51%,#8298b7 75%,#f6f9ff);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 1px #1c3655) drop-shadow(0 0 7px #9dcaff55)}
+.intro .wing{line-height:.92;filter:drop-shadow(0 0 8px #358dff44)}
+.intro .wing.right{filter:drop-shadow(0 0 8px #ff496344)}
+
 </style>
 </head>
 <body>
@@ -214,9 +228,9 @@ body{overflow-x:hidden} .top{z-index:20}.navlinks a{padding:6px 0}
  <rect x="64" y="126" width="205" height="210" rx="36" fill="url(#dialGlow)" stroke="#58afff" stroke-width="2"/>
  <rect x="71" y="133" width="191" height="196" rx="31" fill="none" stroke="#8ddfff" stroke-opacity=".26"/>
  <!-- Glowing viewport -->
- <path d="M93 151H143" stroke="#9edcff" stroke-width="2.5" stroke-linecap="round"/>
- <path d="M204 151H241" stroke="#f55077" stroke-width="2.5" stroke-linecap="round" opacity=".82"/>
- <text x="168" y="153" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" letter-spacing="2" fill="#a5defe">CAPSULE</text>
+ <path d="M93 151H129" stroke="#9edcff" stroke-width="2.7" stroke-linecap="round"/>
+ <path d="M207 151H241" stroke="#ff6583" stroke-width="2.7" stroke-linecap="round" opacity=".95"/>
+ <text x="168" y="154" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" letter-spacing="1.8" fill="#cfedff">CAPSULE</text>
  <circle cx="168" cy="234" r="73" stroke="#0d6fc3" stroke-width="1.4" opacity=".48" fill="none"/>
  <circle cx="168" cy="234" r="66" stroke="#3faeff" stroke-width="1.5" stroke-dasharray="3 10" opacity=".6" fill="none"/>
  <circle cx="168" cy="234" r="57" stroke="#5cd2ff" stroke-width="2.6" fill="none" opacity=".24"/>
